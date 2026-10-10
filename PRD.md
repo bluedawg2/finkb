@@ -699,14 +699,14 @@ Primary texts for Pashler 2008, Fernandes 2014, Kaiser 2022, Galesic 2009 and th
 
 ## Open questions and risks
 
-Four decisions need an owner answer before Phase 0; the rest are risks with a planned retirement point.
+Four decisions were needed before Phase 0; the owner accepted the defaults on Oct 10, 2026. The rest are risks with a planned retirement point.
 
 ### Decisions needed
 
-- [ ] **Repo and name.** New repo `finkb` (recommended) or build inside `finkb-bench`? Product name is still "Financial Knowledge Companion"; the CLI and DB file need a short name now.
-- [ ] **Python sidecar policy.** Allowed from day one for Docling, or Rust-only until a PDF failure forces it? Recommendation: Rust-only through Phase 2; decide on real IRS and SSA PDFs.
-- [ ] **Hosted models.** Local-only for all AI in Phase 3, or allow a hosted provider for annotation quality? Local-only keeps the privacy story simple; hosted likely improves claim-type accuracy.
-- [ ] **Posture for `unclear` sources.** Treat as `metadata_link` silently (recommended), or exclude from the registry until verified?
+- [x] **Repo and name.** Decided: rename `finkb-bench` to `finkb` on GitHub (the old URL redirects) and build there, so the PRD, the eval set and the code share one history. CLI binary `finkb`, DB file `finkb.sqlite`. "Financial Knowledge Companion" stays the product name only.
+- [x] **Python sidecar policy.** Decided: Rust-only through Phase 2. The Phase 1 spike on 20 real IRS and SSA PDFs is the trigger; if pdfium loses tables or columns there, add Docling as a sidecar behind the same `extract` trait.
+- [x] **Hosted models.** Decided: local-only wherever user queries, shown summaries or CompassWorth context flow. A hosted provider may annotate public documents offline (claim type, freshness) only if the local-versus-hosted ablation on the labeled set shows local misses the 0.85 claim-type bar and hosted clears it. Same consent and routing split as CompassWorth.
+- [x] **Posture for `unclear` sources.** Decided: treat as `metadata_link` (surrogate indexed, text never stored), and show a "terms unverified" count per source in the monthly corpus report rather than hiding it. The Phase 0 manual check retires most of these.
 
 ### Risks
 
